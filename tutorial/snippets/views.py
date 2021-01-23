@@ -2,6 +2,8 @@ from rest_framework import status
 from rest_framework import mixins
 from rest_framework import generics
 from rest_framework import permissions
+from rest_framework import renderers
+from rest_framework.response import Response
 
 from snippets.models import Snippet
 from snippets.serializers import SnippetSerializer
@@ -49,3 +51,12 @@ class SnippetDetail(mixins.RetrieveModelMixin, mixins.UpdateModelMixin,
 
     def delete(self, request, *args, **kwargs):
         return self.destroy(request, *args, **kwargs)
+
+
+class SnippetHighlight(generics.GenericAPIView):
+    queryset = Snippet.objects.all()
+    renderer_classes = [renderers.StaticHTMLRenderer]
+
+    def get(self, request, *args, **kwargs):
+        snippet = self.get_object()
+        return Response(snippet.highlighted)

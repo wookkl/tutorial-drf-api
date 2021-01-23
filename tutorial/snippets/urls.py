@@ -6,9 +6,9 @@ from snippets import views
 
 app_name = 'snippets'
 
-urlpatterns = [
-    path(r'', views.SnippetList.as_view(), name='snippets-list'),
-    path(r'<int:pk>/', views.SnippetDetail.as_view(), name='snippets-detail'),
-]
-
-urlpatterns = format_suffix_patterns(urlpatterns)
+urlpatterns = format_suffix_patterns([
+    path(r'', views.SnippetList.as_view(), name='snippet-list'),
+    path(r'<int:pk>/', views.SnippetDetail.as_view(), name='snippet-detail'),
+    path(r'<int:pk>/highlight/', views.SnippetHighlight.as_view(),
+         name='snippet-highlight'),
+])

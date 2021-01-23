@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'snippets.apps.SnippetsConfig',
     'users.apps.UsersConfig',
+    'core.apps.CoreConfig',
 ]
 
 MIDDLEWARE = [
